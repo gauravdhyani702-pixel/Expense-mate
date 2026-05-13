@@ -1,0 +1,60 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "User profile information",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "email": { "type": "string" },
+        "displayName": { "type": "string" },
+        "photoURL": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "email", "createdAt"]
+    },
+    "Expense": {
+      "title": "Expense",
+      "description": "An expense record",
+      "type": "object",
+      "properties": {
+        "title": { "type": "string" },
+        "amount": { "type": "number" },
+        "category": { "type": "string" },
+        "date": { "type": "string", "format": "date-time" },
+        "userId": { "type": "string" },
+        "notes": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["title", "amount", "category", "date", "userId", "createdAt"]
+    },
+    "Budget": {
+      "title": "Budget",
+      "description": "A monthly budget limit for a category",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "category": { "type": "string" },
+        "limit": { "type": "number" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "updatedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "category", "limit", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "Individual user profiles"
+    },
+    "/expenses/{expenseId}": {
+      "schema": "Expense",
+      "description": "Expense records stored globally but accessible by user filter"
+    },
+    "/budgets/{budgetId}": {
+      "schema": "Budget",
+      "description": "Category-wise budget limits per user"
+    }
+  }
+}
